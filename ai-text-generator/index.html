@@ -70,14 +70,12 @@
     <script src="../ai/ai-text-generator.js"></script>
 
     <script>
-        // Copy the generated text to clipboard
         function copyText() {
             let text = document.getElementById("generated-text").innerText;
             navigator.clipboard.writeText(text);
             alert("Copied to clipboard!");
         }
 
-        // Download the generated text as a .txt file
         function downloadText() {
             let text = document.getElementById("generated-text").innerText;
             let blob = new Blob([text], { type: "text/plain" });
@@ -88,48 +86,8 @@
             a.click();
             document.body.removeChild(a);
         }
-
-        // Update word count dynamically after text is generated
-        document.getElementById("ai-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-
-            // Show loading message while generating AI content
-            $('#generated-text').text("Generating content, please wait...");
-
-            let userInput = $('#user-input').val();
-
-            // Handle form submission and trigger AI generation
-            $.ajax({
-                url: "https://api.cohere.ai/v1/generate", // Adjust the URL based on your provider
-                type: "POST",
-                headers: {
-                    "Authorization": `Bearer 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`, // Replace with your actual API key
-                    "Content-Type": "application/json"
-                },
-                data: JSON.stringify({
-                    model: "command",  // Adjust the model as per your API documentation
-                    prompt: userInput, // The input text for the AI
-                    max_tokens: 100    // Adjust the token limit based on your needs
-                }),
-                success: function (data) {
-                    if (data.generations && data.generations.length > 0) {
-                        // Display the generated text
-                        $('#generated-text').text(data.generations[0].text);
-
-                        // Update word count
-                        let wordCount = data.generations[0].text.split(/\s+/).filter(word => word.length > 0).length;
-                        document.getElementById("word-count").innerText = "Word Count: " + wordCount;
-                    } else {
-                        $('#generated-text').text("Error: No response received from AI.");
-                    }
-                },
-                error: function (error) {
-                    $('#generated-text').text("Error: Unable to generate text.");
-                    console.error("API Error:", error);
-                }
-            });
-        });
     </script>
 
 </body>
 </html>
+
