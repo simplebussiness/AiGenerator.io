@@ -42,8 +42,9 @@ $(document).ready(function () {
             },
             error: function (error) {
                 // Handle errors
-                $('#generated-text').text("Error: Unable to generate text.");
+                $('#generated-text').text("Error: Unable to generate text. Please try again.");
                 console.error("API Error:", error);
+                alert("There was an error processing your request. Check the console for more details.");
             }
         });
     });
