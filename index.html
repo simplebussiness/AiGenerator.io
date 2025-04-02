@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Custom Styles for Modern Look */
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .tm-text-primary {
+            color: #2c3e50;
+        }
+
+        .tm-strategy-box {
+            transition: transform 0.3s ease;
+        }
+
+        .tm-strategy-box:hover {
+            transform: scale(1.05);
+        }
+
+        .tm-strategy-text {
+            color: #7f8c8d;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            color: #2c3e50;
+        }
+
+        footer .tm-social-icon {
+            color: #2c3e50;
+            margin-right: 15px;
+        }
+
+        footer .tm-social-icon:hover {
+            color: #3498db;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center py-5">
+                <h1 class="tm-text-primary">Generate Unique, AI-Powered Text in Seconds</h1>
+                <p>Create content, blogs, articles, product descriptions, and more with just a click. Save time and enhance your creativity.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Strategy Section -->
+    <section class="container my-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="tm-strategy-box mb-5">
+                    <img src="img/pexels-tara-winstead-8386440.jpg" alt="Content Creation" class="img-fluid tm-strategy-img">
+                    <div>
+                        <h4 class="tm-text-primary">Automate Your Content Creation</h4>
+                        <p class="tm-strategy-text">Our AI text generator can create high-quality blog posts, articles, and more, in just minutes. With advanced algorithms, your content will be unique, relevant, and ready to publish.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="tm-strategy-box mb-5">
+                    <img src="img/pexels-googledeepmind-18069157.jpg" alt="Marketing Boost" class="img-fluid tm-strategy-img">
+                    <div>
+                        <h4 class="tm-text-primary">Boost Your Marketing Campaigns</h4>
+                        <p class="tm-strategy-text">Generate engaging ad copies, social media posts, and email templates to boost your marketing efforts. AI-driven solutions that save you time and maximize conversions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="tm-strategy-box mb-5">
+                    <img src="img/pexels-googledeepmind-25630341-2.jpg" alt="Tailored Solutions" class="img-fluid tm-strategy-img">
+                    <div>
+                        <h4 class="tm-text-primary">AI Text for Any Niche</h4>
+                        <p class="tm-strategy-text">No matter your industry, our AI text generator can provide customized content. Whether you’re in technology, healthcare, or fashion, we’ve got you covered.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Button to go to the second page -->
+    <div class="text-center my-5">
+        <a href="ai-text-generator/index.html" class="btn btn-primary">Try AI Text Generator</a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="container-fluid">
+        <div class="row">
+            <p class="col-lg-9 col-md-8 mb-5 mb-md-0">
+                Copyright &copy; 2025 <span class="tm-text-primary">AI Text Generator</span> - designed by <a rel="nofollow" target="_parent" href="https://templatemo.com" class="tm-link-primary">TemplateMo</a>
+            </p>
+            <div class="col-lg-3 col-md-4 text-right">
+                <a rel="nofollow" target="_blank" href="https://fb.com/templatemo" class="tm-social-link">
+                    <i class="fab fa-facebook fa-2x tm-social-icon"></i>
+                </a>
+                <a href="https://twitter.com" class="tm-social-link">
+                    <i class="fab fa-twitter fa-2x tm-social-icon"></i>
+                </a>
+                <a href="https://linkedin.com" class="tm-social-link">
+                    <i class="fab fa-linkedin fa-2x tm-social-icon"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load jQuery -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/parallax.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#parallax-1').parallax({ imageSrc: 'img/pexels-pixabay-373543.jpg' });
+            $('#parallax-2').parallax({ imageSrc: 'img/pexels-thepaintedsquare-1666315.jpg' });
+        });
+    </script>
+
+</body>
+</html>
