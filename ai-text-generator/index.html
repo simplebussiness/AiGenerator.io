@@ -40,7 +40,7 @@
         <div id="ai-output" class="mt-5">
             <h4>Generated Content:</h4>
             <p id="generated-text"></p>
-            
+
             <!-- Extra Buttons -->
             <div class="btn-group">
                 <button onclick="copyText()" class="btn btn-secondary">Copy</button>
@@ -70,12 +70,14 @@
     <script src="../ai/ai-text-generator.js"></script>
 
     <script>
+        // Copy text to clipboard
         function copyText() {
             let text = document.getElementById("generated-text").innerText;
             navigator.clipboard.writeText(text);
             alert("Copied to clipboard!");
         }
 
+        // Download text as .txt file
         function downloadText() {
             let text = document.getElementById("generated-text").innerText;
             let blob = new Blob([text], { type: "text/plain" });
@@ -86,6 +88,59 @@
             a.click();
             document.body.removeChild(a);
         }
+
+        // Handle form submission
+        $('#ai-form').submit(function (e) {
+            e.preventDefault();
+
+            // Get user input
+            var userInput = $('#user-input').val();
+
+            // Check if input is empty
+            if (userInput.trim() === "") {
+                alert("Please enter a topic or description.");
+                return;
+            }
+
+            // Show loading message while generating AI content
+            $('#generated-text').text("Generating content, please wait...");
+
+            // API Key placeholder - replace with your actual API key
+            var apiKey = "YOUR_OPENAI_API_KEY"; // Replace with your actual OpenAI API key
+
+            // Make the API call to generate AI text
+            $.ajax({
+                url: "https://api.openai.com/v1/completions", // OpenAI API endpoint
+                type: "POST",
+                headers: {
+                    "Authorization": `Bearer ${apiKey}`,
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify({
+                    model: "text-davinci-003",  // Model selection (can be changed)
+                    prompt: userInput,          // User input as prompt
+                    max_tokens: 150             // You can adjust the max token limit
+                }),
+                success: function (data) {
+                    if (data.choices && data.choices.length > 0) {
+                        // Display the generated text
+                        $('#generated-text').text(data.choices[0].text);
+
+                        // Update word count
+                        let wordCount = data.choices[0].text.split(/\s+/).filter(word => word.length > 0).length;
+                        $('#word-count').text(`Word Count: ${wordCount}`);
+                    } else {
+                        // If no result is received
+                        $('#generated-text').text("Error: No response received from AI.");
+                    }
+                },
+                error: function (error) {
+                    // Handle errors
+                    $('#generated-text').text("Error: Unable to generate text.");
+                    console.error("API Error:", error);
+                }
+            });
+        });
     </script>
 
 </body>
