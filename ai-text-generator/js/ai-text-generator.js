@@ -15,21 +15,28 @@ $(document).ready(function () {
         // Show loading message while generating AI content
         $('#generated-text').text("Generating content, please wait...");
 
+        // API Key placeholder - replace with your actual API key
+        var apiKey = "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"; // <-- Replace this with your actual API key
+
         // Make the API call to generate AI text
         $.ajax({
-            url: "/generate-text",  // Endpoint on the backend to generate text
+            url: "https://api.cohere.ai/v1/generate", // API endpoint (change based on your provider)
             type: "POST",
-            data: JSON.stringify({ prompt: userInput }),
-            contentType: "application/json",
+            headers: {
+                "Authorization": `Bearer ${apiKey}`,  // Pass your API key in the Authorization header
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify({
+                model: "command",  // Adjust model based on your provider's documentation
+                prompt: userInput, // The input text you want AI to generate from
+                max_tokens: 10000   // Adjust token limit as per your API provider's recommendations
+            }),
             success: function (data) {
-                // Display the generated text
-                if (data.text) {
-                    $('#generated-text').text(data.text.trim());
-
-                    // Update word count
-                    let wordCount = data.text.trim().split(/\s+/).filter(word => word.length > 0).length;
-                    $('#word-count').text("Word Count: " + wordCount);
+                if (data.generations && data.generations.length > 0) {
+                    // Display the generated text
+                    $('#generated-text').text(data.generations[0].text);
                 } else {
+                    // If no result is received
                     $('#generated-text').text("Error: No response received from AI.");
                 }
             },
@@ -41,4 +48,3 @@ $(document).ready(function () {
         });
     });
 });
-
