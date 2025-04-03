@@ -15,30 +15,15 @@ $(document).ready(function () {
         // Show loading message while generating AI content
         $('#generated-text').text("Generating content, please wait...");
 
-        // API Key placeholder - replace with your actual API key
-        var apiKey = "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"; // <-- Replace this with your actual API key
-
-        // Make the API call to generate AI text
+        // Make the API call to the Glitch backend
         $.ajax({
-            url: "https://api.cohere.ai/v1/generate", // API endpoint (change based on your provider)
+            url: "https://your-glitch-project-name.glitch.me/generate-text",  // Replace with your Glitch project URL
             type: "POST",
-            headers: {
-                "Authorization": `Bearer ${apiKey}`,  // Pass your API key in the Authorization header
-                "Content-Type": "application/json"
-            },
-            data: JSON.stringify({
-                model: "command",  // Adjust model based on your provider's documentation
-                prompt: userInput, // The input text you want AI to generate from
-                max_tokens: 500   // Adjust token limit as per your API provider's recommendations
-            }),
+            contentType: "application/json",
+            data: JSON.stringify({ prompt: userInput }),
             success: function (data) {
-                if (data.generations && data.generations.length > 0) {
-                    // Display the generated text
-                    $('#generated-text').text(data.generations[0].text);
-                } else {
-                    // If no result is received
-                    $('#generated-text').text("Error: No response received from AI.");
-                }
+                // Display the generated text
+                $('#generated-text').text(data.generatedText);
             },
             error: function (error) {
                 // Handle errors
@@ -48,3 +33,4 @@ $(document).ready(function () {
         });
     });
 });
+
