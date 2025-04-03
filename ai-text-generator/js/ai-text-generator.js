@@ -29,7 +29,7 @@ $(document).ready(function () {
             data: JSON.stringify({
                 model: "command",  // Adjust model based on your provider's documentation
                 prompt: userInput, // The input text you want AI to generate from
-                max_tokens: 10000   // Adjust token limit as per your API provider's recommendations
+                max_tokens: 500   // Adjust token limit as per your API provider's recommendations
             }),
             success: function (data) {
                 if (data.generations && data.generations.length > 0) {
