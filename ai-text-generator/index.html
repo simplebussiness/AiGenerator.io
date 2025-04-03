@@ -11,14 +11,17 @@
     <link rel="stylesheet" href="../css/style.css">
 
     <style>
-        #generated-text { 
-            white-space: pre-line; 
-            border: 1px solid #ccc; 
-            padding: 10px; 
-            min-height: 100px; 
+        #generated-text {
+            white-space: pre-line;
+            border: 1px solid #ccc;
+            padding: 10px;
+            min-height: 100px;
             background-color: #f8f9fa;
         }
-        .btn-group { margin-top: 10px; }
+
+        .btn-group {
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -40,7 +43,7 @@
         <div id="ai-output" class="mt-5">
             <h4>Generated Content:</h4>
             <p id="generated-text"></p>
-            
+
             <!-- Extra Buttons -->
             <div class="btn-group">
                 <button onclick="copyText()" class="btn btn-secondary">Copy</button>
@@ -66,9 +69,6 @@
     <script src="../js/jquery-3.4.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 
-    <!-- AI Text Generation Logic -->
-    <script src="../ai/ai-text-generator.js"></script>
-
     <script>
         function copyText() {
             let text = document.getElementById("generated-text").innerText;
@@ -88,16 +88,43 @@
         }
 
         // Update word count dynamically
-        document.getElementById("ai-form").addEventListener("submit", function () {
-            setTimeout(() => {
-                let outputText = document.getElementById("generated-text").innerText;
-                let wordCount = outputText ? outputText.split(/\s+/).filter(word => word.length > 0).length : 0;
-                document.getElementById("word-count").innerText = "Word Count: " + wordCount;
-            }, 2000);
+        document.getElementById("ai-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let userInput = document.getElementById("user-input").value;
+
+            // Show loading message
+            document.getElementById("generated-text").innerText = "Generating content, please wait...";
+
+            // Make the API request
+            fetch('https://ai-text-generator-backend.glitch.me/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    prompt: userInput,
+                    max_tokens: 1000,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.generatedText) {
+                    document.getElementById("generated-text").innerText = data.generatedText;
+                } else {
+                    document.getElementById("generated-text").innerText = "Error: Unable to generate text.";
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById("generated-text").innerText = "Error: Unable to generate text.";
+            });
         });
     </script>
 
 </body>
+
 </html>
+
 
 
