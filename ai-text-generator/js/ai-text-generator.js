@@ -17,7 +17,7 @@ $(document).ready(function () {
 
         // Make the API call to the Glitch backend
         $.ajax({
-            url: "https://your-glitch-project-name.glitch.me/generate-text",  // Replace with your Glitch project URL
+            url: "https://ai-text-generator-backend.glitch.me/generate-text",  // Your Glitch backend URL
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify({ prompt: userInput }),
@@ -33,4 +33,3 @@ $(document).ready(function () {
         });
     });
 });
-
